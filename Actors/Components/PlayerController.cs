@@ -6,8 +6,11 @@ public partial class PlayerController : Node
 {
   [Export]
   private PhysicsComponent _physics;
+  [Export]
+  private StateMachine _stateMachine;
 
-  public int Direction { get; private set; } = 0;
+  public int Direction { get; private set; }
+  public bool CanMove = true;
 
   private CharacterBody2D _owner;
 
@@ -16,24 +19,31 @@ public partial class PlayerController : Node
     if (_physics == null) {
       GD.PrintErr("No PhysicsComponent in PlayerController");
     }
+    if (_stateMachine == null) {
+      GD.PrintErr("No StateMachine in PlayerController");
+    }
 
     _owner = Owner as CharacterBody2D;
   }
 
   public override void _UnhandledInput(InputEvent @event)
   {
-    Direction = 0;
-    if (Input.IsActionPressed("left")) {
-      Direction -= 1;
-    }
-    if (Input.IsActionPressed("right")) {
-      Direction += 1;
-    }
-
-    _physics.SetHorizontalDirection(Direction);
+    if (!CanMove) return;
 
     if (Input.IsActionJustPressed("jump") && _owner.IsOnFloor()) {
-      _physics.Jump();
+      _stateMachine.SwitchState("Jump");
     }
+
+    Direction = (int)Input.GetAxis("left", "right");
+    _physics.SetHorizontalDirection(Direction);
+
+    if (Direction != 0) {
+      _stateMachine.SwitchState("Run");
+    }
+  }
+
+  public bool IsMoving()
+  {
+    return _owner.Velocity.X != 0;
   }
 }

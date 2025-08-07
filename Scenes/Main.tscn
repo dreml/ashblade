@@ -9,4 +9,4 @@
 position = Vector2(505, 293)
 
 [node name="Platform" parent="." instance=ExtResource("2_kln2b")]
-position = Vector2(529, 393)
+position = Vector2(634, 607)

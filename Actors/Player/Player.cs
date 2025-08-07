@@ -18,12 +18,6 @@ public partial class Player : CharacterBody2D
 
   public override void _PhysicsProcess(double delta)
   {
-    if (_controller.Direction != 0) {
-      _animPlayer.Play("Run");
-      _sprite.FlipH = _controller.Direction < 0;
-    } else {
-      _animPlayer.Play("Idle");
-    }
 
   }
 }
