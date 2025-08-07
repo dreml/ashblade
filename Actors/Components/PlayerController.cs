@@ -1,15 +1,39 @@
 using Godot;
 using System;
 
+[GlobalClass]
 public partial class PlayerController : Node
 {
-	// Called when the node enters the scene tree for the first time.
-	public override void _Ready()
-	{
-	}
+  [Export]
+  private PhysicsComponent _physics;
 
-	// Called every frame. 'delta' is the elapsed time since the previous frame.
-	public override void _Process(double delta)
-	{
-	}
+  public int Direction { get; private set; } = 0;
+
+  private CharacterBody2D _owner;
+
+  public override void _Ready()
+  {
+    if (_physics == null) {
+      GD.PrintErr("No PhysicsComponent in PlayerController");
+    }
+
+    _owner = Owner as CharacterBody2D;
+  }
+
+  public override void _UnhandledInput(InputEvent @event)
+  {
+    Direction = 0;
+    if (Input.IsActionPressed("left")) {
+      Direction -= 1;
+    }
+    if (Input.IsActionPressed("right")) {
+      Direction += 1;
+    }
+
+    _physics.SetHorizontalDirection(Direction);
+
+    if (Input.IsActionJustPressed("jump") && _owner.IsOnFloor()) {
+      _physics.Jump();
+    }
+  }
 }

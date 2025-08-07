@@ -89,11 +89,14 @@ _data = {
 collision_layer = 2
 script = ExtResource("1_4flbx")
 
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("_physics")]
+script = ExtResource("3_yqfyh")
+_physics = NodePath("../PhysicsComponent")
+metadata/_custom_type_script = "uid://c1uqiqa0nk64e"
+
 [node name="PhysicsComponent" type="Node" parent="."]
 script = ExtResource("3_urha2")
-
-[node name="PlayerController" type="Node" parent="."]
-script = ExtResource("3_yqfyh")
+metadata/_custom_type_script = "uid://v7538imq6ytg"
 
 [node name="HurtBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_onrkg")
