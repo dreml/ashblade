@@ -10,7 +10,7 @@ public partial class PhysicsComponent : Node
   private float _jumpForce = 400.0f;
 
   private CharacterBody2D _owner;
-  private float _moveDirection = 0;
+  private int _moveDirection = 0;
   private float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
   public override void _Ready()
