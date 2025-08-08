@@ -8,11 +8,15 @@ public partial class PlayerController : Node
   private PhysicsComponent _physics;
   [Export]
   private StateMachine _stateMachine;
+  [Export]
+  private ulong JumpBufferMs = 150;
 
-  public int Direction { get; private set; }
+  public int MoveDirection { get; private set; }
+  public bool WantsToJump => _jumpRequestTime != 0 && Time.GetTicksMsec() - _jumpRequestTime < JumpBufferMs;
   public bool CanMove = true;
 
   private CharacterBody2D _owner;
+  private ulong _jumpRequestTime;
 
   public override void _Ready()
   {
@@ -31,19 +35,16 @@ public partial class PlayerController : Node
     if (!CanMove) return;
 
     if (Input.IsActionJustPressed("jump") && _owner.IsOnFloor()) {
+      _jumpRequestTime = Time.GetTicksMsec();
       _stateMachine.SwitchState("Jump");
     }
 
-    Direction = (int)Input.GetAxis("left", "right");
-    _physics.SetHorizontalDirection(Direction);
-
-    if (Direction != 0) {
-      _stateMachine.SwitchState("Run");
-    }
+    MoveDirection = (int)Input.GetAxis("left", "right");
+    _physics.SetMoveDirection(MoveDirection);
   }
 
-  public bool IsMoving()
+  public void ConsumeJumpInput()
   {
-    return _owner.Velocity.X != 0;
+    _jumpRequestTime = 0;
   }
 }

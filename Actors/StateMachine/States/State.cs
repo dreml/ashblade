@@ -7,6 +7,7 @@ public abstract partial class State : Node
   protected AnimationPlayer _animPlayer;
   protected Sprite2D _sprite;
   protected PhysicsComponent _physics;
+  protected PlayerController _controller;
 
   public virtual void Enter() { }
   public virtual void Exit() { }
@@ -19,6 +20,7 @@ public abstract partial class State : Node
     _animPlayer = Owner.GetNode<AnimationPlayer>("AnimationPlayer");
     _sprite = Owner.GetNode<Sprite2D>("Sprite");
     _physics = Owner.GetNode<PhysicsComponent>("PhysicsComponent");
+    _controller = _owner.GetNode<PlayerController>("PlayerController");
   }
 
 }

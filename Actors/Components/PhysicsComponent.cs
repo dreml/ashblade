@@ -10,7 +10,7 @@ public partial class PhysicsComponent : Node
   private float _jumpForce = 400.0f;
 
   private CharacterBody2D _owner;
-  private float _direction = 0;
+  private float _moveDirection = 0;
   private float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
   public override void _Ready()
@@ -22,7 +22,7 @@ public partial class PhysicsComponent : Node
   {
     Vector2 velocity = _owner.Velocity;
 
-    velocity.X = _direction * _speed;
+    velocity.X = _moveDirection * _speed;
     if (!_owner.IsOnFloor()) {
       velocity.Y += _gravity * (float)delta;
     }
@@ -31,9 +31,9 @@ public partial class PhysicsComponent : Node
     _owner.MoveAndSlide();
   }
 
-  public void SetHorizontalDirection(int direction)
+  public void SetMoveDirection(int direction)
   {
-    _direction = direction;
+    _moveDirection = direction;
   }
 
   public void Jump()
@@ -41,6 +41,11 @@ public partial class PhysicsComponent : Node
     if (!_owner.IsOnFloor()) return;
 
     ChangeOwnerVelocity(_owner.Velocity with { Y = -1 * _jumpForce });
+  }
+
+  public bool IsMoving()
+  {
+    return _owner.Velocity.X != 0;
   }
 
   private void ChangeOwnerVelocity(Vector2 velocity)

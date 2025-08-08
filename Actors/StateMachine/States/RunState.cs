@@ -3,15 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class RunState : State
 {
-  private PlayerController _controller;
-
-  public override void _Ready()
-  {
-    base._Ready();
-
-    _controller = _owner.GetNode<PlayerController>("PlayerController");
-  }
-
   public override void Enter()
   {
     GD.Print("Entering Run state");
@@ -22,12 +13,14 @@ public partial class RunState : State
 
   public override void Process(double delta)
   {
-    if (!_controller.IsMoving()) {
+    if (_controller.MoveDirection == 0) {
       _stateMachine.SwitchState("Idle");
+    } else {
+      _sprite.FlipH = _controller.MoveDirection < 0;
     }
 
-    if (_controller.Direction != 0) {
-      _sprite.FlipH = _controller.Direction < 0;
+    if (_controller.WantsToJump) {
+      _stateMachine.SwitchState("Jump");
     }
   }
 }
