@@ -1,34 +1,27 @@
 using Godot;
-using System;
 
 [GlobalClass]
-public partial class PhysicsComponent : Node
+public partial class PhysicsComponent : Component
 {
   [Export]
   private float _speed = 400.0f;
   [Export]
   private float _jumpForce = 400.0f;
 
-  private CharacterBody2D _owner;
   private int _moveDirection = 0;
   private float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
-  public override void _Ready()
-  {
-    _owner = Owner as CharacterBody2D;
-  }
-
   public override void _Process(double delta)
   {
-    Vector2 velocity = _owner.Velocity;
+    Vector2 velocity = OwnerCharacter.Velocity;
 
     velocity.X = _moveDirection * _speed;
-    if (!_owner.IsOnFloor()) {
+    if (!OwnerCharacter.IsOnFloor()) {
       velocity.Y += _gravity * (float)delta;
     }
 
     ChangeOwnerVelocity(velocity);
-    _owner.MoveAndSlide();
+    OwnerCharacter.MoveAndSlide();
   }
 
   public void SetMoveDirection(int direction)
@@ -38,18 +31,18 @@ public partial class PhysicsComponent : Node
 
   public void Jump()
   {
-    if (!_owner.IsOnFloor()) return;
+    if (!OwnerCharacter.IsOnFloor()) return;
 
-    ChangeOwnerVelocity(_owner.Velocity with { Y = -1 * _jumpForce });
+    ChangeOwnerVelocity(OwnerCharacter.Velocity with { Y = -1 * _jumpForce });
   }
 
   public bool IsMoving()
   {
-    return _owner.Velocity.X != 0;
+    return OwnerCharacter.Velocity.X != 0;
   }
 
   private void ChangeOwnerVelocity(Vector2 velocity)
   {
-    _owner.Velocity = velocity;
+    OwnerCharacter.Velocity = velocity;
   }
 }

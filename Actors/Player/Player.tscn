@@ -1,9 +1,10 @@
-[gd_scene load_steps=15 format=3 uid="uid://c630taxbmqafi"]
+[gd_scene load_steps=16 format=3 uid="uid://c630taxbmqafi"]
 
 [ext_resource type="Script" uid="uid://0rreaacjdsja" path="res://Actors/Player/Player.cs" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://bts7v8dx580ai" path="res://Assets/Sprites/Warrior.png" id="2_onrkg"]
 [ext_resource type="Script" uid="uid://v7538imq6ytg" path="res://Actors/Components/PhysicsComponent.cs" id="3_urha2"]
 [ext_resource type="Script" uid="uid://c1uqiqa0nk64e" path="res://Actors/Components/PlayerController.cs" id="3_yqfyh"]
+[ext_resource type="Script" uid="uid://dkgbafti6nkgt" path="res://Actors/Components/HealthComponent.cs" id="4_6e37q"]
 [ext_resource type="Script" uid="uid://ducx4o88gh0o4" path="res://Actors/StateMachine/StateMachine.cs" id="4_l6vkj"]
 [ext_resource type="Script" uid="uid://d225mus6etxgj" path="res://Actors/StateMachine/States/IdleState.cs" id="5_rsi04"]
 [ext_resource type="Script" uid="uid://c4p1jtn2nqhky" path="res://Actors/StateMachine/States/RunState.cs" id="6_rsi04"]
@@ -93,16 +94,20 @@ _data = {
 collision_layer = 2
 script = ExtResource("1_4flbx")
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("_physics", "_stateMachine")]
+[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("Physics", "StateMachine")]
 script = ExtResource("3_yqfyh")
-_physics = NodePath("../PhysicsComponent")
-_stateMachine = NodePath("../StateMachine")
+Physics = NodePath("../PhysicsComponent")
+StateMachine = NodePath("../StateMachine")
 metadata/_custom_type_script = "uid://c1uqiqa0nk64e"
 
 [node name="PhysicsComponent" type="Node" parent="."]
 script = ExtResource("3_urha2")
 _jumpForce = 600.0
 metadata/_custom_type_script = "uid://v7538imq6ytg"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_6e37q")
+metadata/_custom_type_script = "uid://dkgbafti6nkgt"
 
 [node name="StateMachine" type="Node" parent="."]
 script = ExtResource("4_l6vkj")

@@ -6,24 +6,24 @@ public partial class JumpState : State
   public override void Enter()
   {
     GD.Print("Entering Jump state");
-    if (!_controller.WantsToJump) return;
+    if (!Controller.WantsToJump) return;
 
-    _physics.Jump();
-    _controller.ConsumeJumpInput();
+    Physics.Jump();
+    Controller.ConsumeJumpInput();
   }
 
   public override void Exit() { }
 
   public override void Process(double delta)
   {
-    var isMoving = _controller.MoveDirection != 0;
+    var isMoving = Controller.MoveDirection != 0;
 
-    if (_owner.IsOnFloor()) {
-      _stateMachine.SwitchState(isMoving ? "Run" : "Idle");
+    if (OwnerCharacter.IsOnFloor()) {
+      StateMachine.SwitchState(isMoving ? "Run" : "Idle");
     }
 
     if (isMoving) {
-      _sprite.FlipH = _controller.MoveDirection < 0;
+      Sprite.FlipH = Controller.MoveDirection < 0;
     }
   }
 }

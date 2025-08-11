@@ -4,13 +4,13 @@ using System.Collections.Generic;
 [GlobalClass]
 public partial class StateMachine : Node
 {
-  private CharacterBody2D _owner;
+  private Character _owner;
   private State _currentState;
   private Dictionary<string, State> _states = new();
 
   public override void _Ready()
   {
-    _owner = Owner as CharacterBody2D;
+    _owner = Owner as Character;
 
     foreach (Node child in GetChildren()) {
       if (child is State state) {
