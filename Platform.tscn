@@ -13,6 +13,6 @@ position = Vector2(-44.5, 0)
 shape = SubResource("RectangleShape2D_ig7tw")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(-45.5, 9.53674e-07)
+position = Vector2(-666, -24)
 scale = Vector2(1251, 44)
 texture = SubResource("PlaceholderTexture2D_5ajho")

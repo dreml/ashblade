@@ -14,6 +14,10 @@ config/name="Ashblade"
 run/main_scene="uid://78fosqhqt88t"
 config/features=PackedStringArray("4.4", "C#", "GL Compatibility")
 
+[display]
+
+window/stretch/mode="canvas_items"
+
 [dotnet]
 
 project/assembly_name="Ashblade"
@@ -53,5 +57,7 @@ attack={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
+2d/snap/snap_2d_transforms_to_pixel=true
