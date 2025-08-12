@@ -1,40 +1,10 @@
-[gd_scene load_steps=18 format=3 uid="uid://c630taxbmqafi"]
+[gd_scene load_steps=8 format=3 uid="uid://cm4s12v07gsa1"]
 
-[ext_resource type="Script" uid="uid://0rreaacjdsja" path="res://Actors/Player/Player.cs" id="1_4flbx"]
-[ext_resource type="Texture2D" uid="uid://bts7v8dx580ai" path="res://Assets/Sprites/Warrior.png" id="2_onrkg"]
-[ext_resource type="Script" uid="uid://v7538imq6ytg" path="res://Core/Components/PhysicsComponent.cs" id="3_urha2"]
-[ext_resource type="Script" uid="uid://c1uqiqa0nk64e" path="res://Core/Components/PlayerController.cs" id="3_yqfyh"]
-[ext_resource type="Script" uid="uid://dkgbafti6nkgt" path="res://Core/Components/HealthComponent.cs" id="4_6e37q"]
-[ext_resource type="Script" uid="uid://ducx4o88gh0o4" path="res://Core/StateMachine/StateMachine.cs" id="4_l6vkj"]
-[ext_resource type="Script" uid="uid://d225mus6etxgj" path="res://Core/StateMachine/States/IdleState.cs" id="5_rsi04"]
-[ext_resource type="Script" uid="uid://c4p1jtn2nqhky" path="res://Core/StateMachine/States/RunState.cs" id="6_rsi04"]
-[ext_resource type="Script" uid="uid://c7lh1xse3altn" path="res://Core/StateMachine/States/JumpState.cs" id="7_kkbrm"]
-[ext_resource type="Script" uid="uid://dp63djcyhbw2f" path="res://Core/StateMachine/States/FallingState.cs" id="9_qhy2x"]
-[ext_resource type="Script" uid="uid://bqop06gcm06no" path="res://Core/StateMachine/States/AttackState.cs" id="10_gh11b"]
+[ext_resource type="PackedScene" uid="uid://c1h3ag50e4qkn" path="res://Actors/Character.tscn" id="1_3nsqd"]
+[ext_resource type="Script" uid="uid://c1uqiqa0nk64e" path="res://Core/Components/PlayerController.cs" id="2_46khx"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
-radius = 22.0
-height = 66.0
-
-[sub_resource type="Animation" id="Animation_sweqy"]
-resource_name = "Attack"
-length = 0.6
-step = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [12, 13, 14, 15, 16, 17]
-}
-
-[sub_resource type="Animation" id="Animation_i3pqv"]
-resource_name = "idle"
+[sub_resource type="Animation" id="Animation_4x03u"]
+resource_name = "Idle"
 length = 0.6
 loop_mode = 1
 step = 0.1
@@ -51,7 +21,7 @@ tracks/0/keys = {
 "values": [0, 1, 2, 3, 4, 5]
 }
 
-[sub_resource type="Animation" id="Animation_hqtel"]
+[sub_resource type="Animation" id="Animation_urha2"]
 length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -66,7 +36,7 @@ tracks/0/keys = {
 "values": [0]
 }
 
-[sub_resource type="Animation" id="Animation_onrkg"]
+[sub_resource type="Animation" id="Animation_yqfyh"]
 resource_name = "Run"
 length = 0.6
 loop_mode = 1
@@ -84,67 +54,43 @@ tracks/0/keys = {
 "values": [6, 7, 8, 9, 10, 11]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_sweqy"]
-_data = {
-&"Attack": SubResource("Animation_sweqy"),
-&"Idle": SubResource("Animation_i3pqv"),
-&"RESET": SubResource("Animation_hqtel"),
-&"Run": SubResource("Animation_onrkg")
+[sub_resource type="Animation" id="Animation_vywg6"]
+resource_name = "Attack"
+length = 0.6
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [12, 13, 14, 15, 16, 17]
 }
 
-[node name="Player" type="CharacterBody2D"]
-collision_layer = 2
-script = ExtResource("1_4flbx")
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yqfyh"]
+_data = {
+&"Attack": SubResource("Animation_vywg6"),
+&"Idle": SubResource("Animation_4x03u"),
+&"RESET": SubResource("Animation_urha2"),
+&"Run": SubResource("Animation_yqfyh")
+}
 
-[node name="PlayerController" type="Node" parent="." node_paths=PackedStringArray("Physics", "StateMachine")]
-script = ExtResource("3_yqfyh")
+[node name="Player" instance=ExtResource("1_3nsqd")]
+
+[node name="Sprite" parent="." index="4"]
+frame = 0
+
+[node name="Controller" type="Node" parent="." index="5" node_paths=PackedStringArray("Physics", "StateMachine")]
+script = ExtResource("2_46khx")
 Physics = NodePath("../PhysicsComponent")
 StateMachine = NodePath("../StateMachine")
 metadata/_custom_type_script = "uid://c1uqiqa0nk64e"
 
-[node name="PhysicsComponent" type="Node" parent="."]
-script = ExtResource("3_urha2")
-_jumpForce = 600.0
-metadata/_custom_type_script = "uid://v7538imq6ytg"
-
-[node name="HealthComponent" type="Node" parent="."]
-script = ExtResource("4_6e37q")
-metadata/_custom_type_script = "uid://dkgbafti6nkgt"
-
-[node name="StateMachine" type="Node" parent="."]
-script = ExtResource("4_l6vkj")
-metadata/_custom_type_script = "uid://ducx4o88gh0o4"
-
-[node name="IdleState" type="Node" parent="StateMachine"]
-script = ExtResource("5_rsi04")
-metadata/_custom_type_script = "uid://d225mus6etxgj"
-
-[node name="RunState" type="Node" parent="StateMachine"]
-script = ExtResource("6_rsi04")
-metadata/_custom_type_script = "uid://c4p1jtn2nqhky"
-
-[node name="JumpState" type="Node" parent="StateMachine"]
-script = ExtResource("7_kkbrm")
-metadata/_custom_type_script = "uid://c7lh1xse3altn"
-
-[node name="FallingState" type="Node" parent="StateMachine"]
-script = ExtResource("9_qhy2x")
-metadata/_custom_type_script = "uid://dp63djcyhbw2f"
-
-[node name="AttackState" type="Node" parent="StateMachine"]
-script = ExtResource("10_gh11b")
-metadata/_custom_type_script = "uid://bqop06gcm06no"
-
-[node name="HurtBox" type="CollisionShape2D" parent="."]
-shape = SubResource("CapsuleShape2D_onrkg")
-
-[node name="Sprite" type="Sprite2D" parent="."]
-texture = ExtResource("2_onrkg")
-hframes = 6
-vframes = 8
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." index="6"]
 libraries = {
-&"": SubResource("AnimationLibrary_sweqy")
+&"": SubResource("AnimationLibrary_yqfyh")
 }
-autoplay = "Idle"

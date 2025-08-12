@@ -1,0 +1,62 @@
+[gd_scene load_steps=12 format=3 uid="uid://c1h3ag50e4qkn"]
+
+[ext_resource type="Script" uid="uid://0rreaacjdsja" path="res://Actors/Player/Player.cs" id="1_s7k60"]
+[ext_resource type="Script" uid="uid://v7538imq6ytg" path="res://Core/Components/PhysicsComponent.cs" id="3_wuvf4"]
+[ext_resource type="Script" uid="uid://dkgbafti6nkgt" path="res://Core/Components/HealthComponent.cs" id="4_l6afh"]
+[ext_resource type="Script" uid="uid://ducx4o88gh0o4" path="res://Core/StateMachine/StateMachine.cs" id="5_id71p"]
+[ext_resource type="Script" uid="uid://d225mus6etxgj" path="res://Core/StateMachine/States/IdleState.cs" id="6_qhayu"]
+[ext_resource type="Script" uid="uid://c4p1jtn2nqhky" path="res://Core/StateMachine/States/RunState.cs" id="7_7dh33"]
+[ext_resource type="Script" uid="uid://c7lh1xse3altn" path="res://Core/StateMachine/States/JumpState.cs" id="8_ia3sh"]
+[ext_resource type="Script" uid="uid://dp63djcyhbw2f" path="res://Core/StateMachine/States/FallingState.cs" id="9_16kn1"]
+[ext_resource type="Script" uid="uid://bqop06gcm06no" path="res://Core/StateMachine/States/AttackState.cs" id="10_4joh6"]
+[ext_resource type="Texture2D" uid="uid://bts7v8dx580ai" path="res://Assets/Sprites/Warrior.png" id="11_qikjq"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
+radius = 22.0
+height = 66.0
+
+[node name="Character" type="CharacterBody2D"]
+collision_layer = 2
+script = ExtResource("1_s7k60")
+
+[node name="PhysicsComponent" type="Node" parent="."]
+script = ExtResource("3_wuvf4")
+_jumpForce = 600.0
+metadata/_custom_type_script = "uid://v7538imq6ytg"
+
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("4_l6afh")
+metadata/_custom_type_script = "uid://dkgbafti6nkgt"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("5_id71p")
+metadata/_custom_type_script = "uid://ducx4o88gh0o4"
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+script = ExtResource("6_qhayu")
+metadata/_custom_type_script = "uid://d225mus6etxgj"
+
+[node name="RunState" type="Node" parent="StateMachine"]
+script = ExtResource("7_7dh33")
+metadata/_custom_type_script = "uid://c4p1jtn2nqhky"
+
+[node name="JumpState" type="Node" parent="StateMachine"]
+script = ExtResource("8_ia3sh")
+metadata/_custom_type_script = "uid://c7lh1xse3altn"
+
+[node name="FallingState" type="Node" parent="StateMachine"]
+script = ExtResource("9_16kn1")
+metadata/_custom_type_script = "uid://dp63djcyhbw2f"
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("10_4joh6")
+metadata/_custom_type_script = "uid://bqop06gcm06no"
+
+[node name="HurtBox" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_onrkg")
+
+[node name="Sprite" type="Sprite2D" parent="."]
+texture = ExtResource("11_qikjq")
+hframes = 6
+vframes = 8
+frame = 12
