@@ -12,6 +12,7 @@ public abstract partial class BaseController : Component
 
   public int MoveDirection { get; protected set; }
   public bool CanMove { get; set; } = true;
+  public bool CanDoubleJump { get; set; } = true;
   public bool WantsToJump => _jumpRequestTime != 0 && Time.GetTicksMsec() - _jumpRequestTime < JumpBufferMs;
 
   protected ulong _jumpRequestTime;

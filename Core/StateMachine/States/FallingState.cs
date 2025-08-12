@@ -1,0 +1,34 @@
+using Godot;
+
+[GlobalClass]
+public partial class FallingState : State
+{
+  public override void Enter()
+  {
+    GD.Print("Entering Falling state");
+    // AnimPlayer.Play("Falling");
+  }
+
+  public override void Process(double delta)
+  {
+    if (OwnerCharacter.IsOnFloor()) {
+      bool isMoving = Controller.MoveDirection != 0;
+      if (isMoving) {
+        StateMachine.SwitchState<RunState>();
+      } else {
+        StateMachine.SwitchState<IdleState>();
+      }
+      return;
+    }
+
+    if (Controller.WantsToJump && Controller.CanDoubleJump) {
+      Controller.CanDoubleJump = false;
+      StateMachine.SwitchState<JumpState>();
+    }
+
+    if (Controller.MoveDirection != 0) {
+      Sprite.FlipH = Controller.MoveDirection < 0;
+    }
+  }
+}
+

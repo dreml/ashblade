@@ -1,12 +1,14 @@
 using Godot;
+using System;
 using System.Collections.Generic;
+using System.Linq;
 
 [GlobalClass]
 public partial class StateMachine : Node
 {
   private Character _owner;
   private State _currentState;
-  private Dictionary<string, State> _states = new();
+  private Dictionary<Type, State> _states = new();
 
   public override void _Ready()
   {
@@ -14,14 +16,12 @@ public partial class StateMachine : Node
 
     foreach (Node child in GetChildren()) {
       if (child is State state) {
-        _states[state.Name] = state;
+        _states[child.GetType()] = state;
       }
     }
 
     if (_states.Count > 0) {
-      var first = _states.Values.GetEnumerator();
-      first.MoveNext();
-      SwitchToState(first.Current);
+      SwitchToState(_states.Values.First());
     }
   }
 
@@ -30,12 +30,12 @@ public partial class StateMachine : Node
     _currentState?.Process(delta);
   }
 
-  public void SwitchState(string stateName)
+  public void SwitchState<T>() where T : State
   {
-    if (_states.TryGetValue(stateName + "State", out var newState)) {
+    if (_states.TryGetValue(typeof(T), out var newState)) {
       SwitchToState(newState);
     } else {
-      GD.PushWarning($"State '{stateName}' not found.");
+      GD.PushWarning($"State of type '{typeof(T).Name}' not found.");
     }
   }
 

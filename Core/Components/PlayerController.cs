@@ -9,9 +9,8 @@ public partial class PlayerController : BaseController
       return;
     }
 
-    if (Input.IsActionJustPressed("jump") && OwnerCharacter.IsOnFloor()) {
+    if (Input.IsActionJustPressed("jump")) {
       _jumpRequestTime = Time.GetTicksMsec();
-      StateMachine.SwitchState("Jump");
     }
 
     MoveDirection = (int)Input.GetAxis("left", "right");

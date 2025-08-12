@@ -31,8 +31,6 @@ public partial class PhysicsComponent : Component
 
   public void Jump()
   {
-    if (!OwnerCharacter.IsOnFloor()) return;
-
     ChangeOwnerVelocity(OwnerCharacter.Velocity with { Y = -1 * _jumpForce });
   }
 

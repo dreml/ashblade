@@ -9,9 +9,9 @@ public abstract partial class State : Node
   protected PhysicsComponent Physics { get; private set; }
   protected PlayerController Controller { get; private set; }
 
-  public abstract void Enter();
-  public abstract void Exit();
-  public abstract void Process(double delta);
+  public virtual void Enter() { }
+  public virtual void Exit() { }
+  public virtual void Process(double delta) { }
 
   public override void _Ready()
   {
