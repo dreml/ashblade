@@ -12,6 +12,9 @@ public partial class PlayerController : BaseController
     if (Input.IsActionJustPressed("jump")) {
       _jumpRequestTime = Time.GetTicksMsec();
     }
+    if (Input.IsActionJustPressed("attack")) {
+      _attackRequestTime = Time.GetTicksMsec();
+    }
 
     MoveDirection = (int)Input.GetAxis("left", "right");
     Physics.SetMoveDirection(MoveDirection);

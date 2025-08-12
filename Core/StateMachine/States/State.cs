@@ -9,9 +9,16 @@ public abstract partial class State : Node
   protected PhysicsComponent Physics { get; private set; }
   protected PlayerController Controller { get; private set; }
 
+  protected virtual bool CanAttack => true;
+
   public virtual void Enter() { }
   public virtual void Exit() { }
-  public virtual void Process(double delta) { }
+  public virtual void Process(double delta)
+  {
+    if (CanAttack && Controller.WantsToAttack) {
+      StateMachine.SwitchState<AttackState>();
+    }
+  }
 
   public override void _Ready()
   {

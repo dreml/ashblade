@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://c630taxbmqafi"]
+[gd_scene load_steps=18 format=3 uid="uid://c630taxbmqafi"]
 
 [ext_resource type="Script" uid="uid://0rreaacjdsja" path="res://Actors/Player/Player.cs" id="1_4flbx"]
 [ext_resource type="Texture2D" uid="uid://bts7v8dx580ai" path="res://Assets/Sprites/Warrior.png" id="2_onrkg"]
@@ -10,6 +10,7 @@
 [ext_resource type="Script" uid="uid://c4p1jtn2nqhky" path="res://Core/StateMachine/States/RunState.cs" id="6_rsi04"]
 [ext_resource type="Script" uid="uid://c7lh1xse3altn" path="res://Core/StateMachine/States/JumpState.cs" id="7_kkbrm"]
 [ext_resource type="Script" uid="uid://dp63djcyhbw2f" path="res://Core/StateMachine/States/FallingState.cs" id="9_qhy2x"]
+[ext_resource type="Script" uid="uid://bqop06gcm06no" path="res://Core/StateMachine/States/AttackState.cs" id="10_gh11b"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 22.0
@@ -129,6 +130,10 @@ metadata/_custom_type_script = "uid://c7lh1xse3altn"
 [node name="FallingState" type="Node" parent="StateMachine"]
 script = ExtResource("9_qhy2x")
 metadata/_custom_type_script = "uid://dp63djcyhbw2f"
+
+[node name="AttackState" type="Node" parent="StateMachine"]
+script = ExtResource("10_gh11b")
+metadata/_custom_type_script = "uid://bqop06gcm06no"
 
 [node name="HurtBox" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_onrkg")

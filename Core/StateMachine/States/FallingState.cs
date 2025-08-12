@@ -11,6 +11,8 @@ public partial class FallingState : State
 
   public override void Process(double delta)
   {
+    base.Process(delta);
+
     if (OwnerCharacter.IsOnFloor()) {
       bool isMoving = Controller.MoveDirection != 0;
       if (isMoving) {

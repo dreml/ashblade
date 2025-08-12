@@ -12,6 +12,8 @@ public partial class IdleState : State
 
   public override void Process(double delta)
   {
+    base.Process(delta);
+
     if (!OwnerCharacter.IsOnFloor()) {
       StateMachine.SwitchState<FallingState>();
       return;
