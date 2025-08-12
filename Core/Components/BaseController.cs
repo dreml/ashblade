@@ -14,6 +14,7 @@ public abstract partial class BaseController : Component
 
   public int MoveDirection { get; protected set; }
   public bool CanMove { get; set; } = true;
+  public bool CanFlip { get; set; } = true;
   public bool CanDoubleJump { get; set; } = true;
   public bool WantsToJump => _jumpRequestTime != 0 && Time.GetTicksMsec() - _jumpRequestTime < JumpBufferMs;
   public bool WantsToAttack => _attackRequestTime != 0 && Time.GetTicksMsec() - _attackRequestTime < AttackBufferMs;
@@ -30,6 +31,13 @@ public abstract partial class BaseController : Component
     }
     if (StateMachine == null) {
       GD.PrintErr("No StateMachine in BaseController");
+    }
+  }
+
+  public override void _Process(double delta)
+  {
+    if (MoveDirection != 0 && CanFlip) {
+      OwnerCharacter.Flip(MoveDirection);
     }
   }
 

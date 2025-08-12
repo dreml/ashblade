@@ -1,8 +1,10 @@
 using Godot;
 
-public partial class Character : CharacterBody2D, IDamageable
+public abstract partial class Character : CharacterBody2D, IDamageable
 {
   protected HealthComponent HealthComponent { get; private set; }
+
+  public abstract void Flip(int moveDirection);
 
   public override void _Ready()
   {

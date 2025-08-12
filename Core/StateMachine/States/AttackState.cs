@@ -7,8 +7,9 @@ public partial class AttackState : State
 
   public override void Enter()
   {
-    GD.Print("Entering Attack state");
+    // GD.Print("Entering Attack state");
 
+    Controller.CanFlip = false;
     Controller.ConsumeAttackInput();
     AnimPlayer.Play("Attack");
     AnimPlayer.AnimationFinished += OnAnimationFinished;
@@ -16,6 +17,7 @@ public partial class AttackState : State
 
   public override void Exit()
   {
+    Controller.CanFlip = true;
     AnimPlayer.AnimationFinished -= OnAnimationFinished;
   }
 

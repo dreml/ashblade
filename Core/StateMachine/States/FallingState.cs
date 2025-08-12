@@ -5,7 +5,7 @@ public partial class FallingState : State
 {
   public override void Enter()
   {
-    GD.Print("Entering Falling state");
+    // GD.Print("Entering Falling state");
     // AnimPlayer.Play("Falling");
   }
 
@@ -26,10 +26,6 @@ public partial class FallingState : State
     if (Controller.WantsToJump && Controller.CanDoubleJump) {
       Controller.CanDoubleJump = false;
       StateMachine.SwitchState<JumpState>();
-    }
-
-    if (Controller.MoveDirection != 0) {
-      Sprite.FlipH = Controller.MoveDirection < 0;
     }
   }
 }

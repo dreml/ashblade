@@ -7,13 +7,14 @@ public partial class HealthComponent : Component
   public delegate void DiedEventHandler();
 
   [Export]
-  private int _maxHealth;
+  private int _maxHealth = 10;
 
   private int _currentHealth;
 
   public override void _Ready()
   {
     base._Ready();
+
     _currentHealth = _maxHealth;
   }
 
@@ -25,6 +26,8 @@ public partial class HealthComponent : Component
     if (IsImmune || IsDead) return;
 
     _currentHealth = Mathf.Clamp(_currentHealth - amount, 0, _maxHealth);
+
+    GD.Print(Owner.Name + " has taken damage: " + amount + ", current health: " + _currentHealth);
 
     if (IsDead) {
       EmitSignal(SignalName.Died);

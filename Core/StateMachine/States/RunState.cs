@@ -5,7 +5,7 @@ public partial class RunState : State
 {
   public override void Enter()
   {
-    GD.Print("Entering Run state");
+    // GD.Print("Entering Run state");
     AnimPlayer.Play("Run");
     Controller.CanDoubleJump = true;
   }
@@ -21,8 +21,6 @@ public partial class RunState : State
 
     if (Controller.MoveDirection == 0) {
       StateMachine.SwitchState<IdleState>();
-    } else {
-      Sprite.FlipH = Controller.MoveDirection < 0;
     }
 
     if (Controller.WantsToJump) {

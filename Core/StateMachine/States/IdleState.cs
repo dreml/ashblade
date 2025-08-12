@@ -5,7 +5,7 @@ public partial class IdleState : State
 {
   public override void Enter()
   {
-    GD.Print("Entering Idle state");
+    // GD.Print("Entering Idle state");
     AnimPlayer.Play("Idle");
     Controller.CanDoubleJump = true;
   }
