@@ -5,8 +5,8 @@ public partial class Player : Character
   [Export]
   private int _damage = 1;
 
-  private Sprite2D _sprite;
   private Area2D _hitbox;
+  private Camera2D _camera;
 
   private Vector2 _hitboxOriginalPosition;
   private float _hitboxOriginalRotation;
@@ -14,7 +14,6 @@ public partial class Player : Character
   public override void _Ready()
   {
     base._Ready();
-    _sprite = GetNode<Sprite2D>("Sprite");
     _hitbox = GetNode<Area2D>("HitBox");
     _hitboxOriginalPosition = _hitbox.Position;
     _hitboxOriginalRotation = _hitbox.Rotation;
@@ -22,7 +21,7 @@ public partial class Player : Character
 
   public override void Flip(int moveDirection)
   {
-    _sprite.FlipH = moveDirection < 0;
+    Sprite.FlipH = moveDirection < 0;
     _hitbox.Position = new Vector2(Mathf.Sign(moveDirection) * _hitboxOriginalPosition.X, _hitboxOriginalPosition.Y);
     _hitbox.Rotation = Mathf.Sign(moveDirection) * _hitboxOriginalRotation;
   }

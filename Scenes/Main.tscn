@@ -9,7 +9,7 @@
 [node name="Platform" parent="." instance=ExtResource("2_kln2b")]
 position = Vector2(634, 607)
 
-[node name="Player" parent="." instance=ExtResource("2_idj7w")]
+[node name="Player" parent="." groups=["player"] instance=ExtResource("2_idj7w")]
 position = Vector2(240, 497)
 
 [node name="Skeleton" parent="." instance=ExtResource("3_kln2b")]

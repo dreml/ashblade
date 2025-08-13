@@ -1,7 +1,8 @@
-[gd_scene load_steps=10 format=3 uid="uid://bi3lc7uu7ajoj"]
+[gd_scene load_steps=11 format=3 uid="uid://bi3lc7uu7ajoj"]
 
 [ext_resource type="PackedScene" uid="uid://c1h3ag50e4qkn" path="res://Actors/Character.tscn" id="1_80yvr"]
 [ext_resource type="Texture2D" uid="uid://csf5sas3bmq7w" path="res://Assets/Sprites/Skull.png" id="2_2wssp"]
+[ext_resource type="Script" uid="uid://cjd6v76hj28lo" path="res://Actors/Skeleton/Skeleton.cs" id="2_phdcb"]
 [ext_resource type="Script" uid="uid://cvmki48py2gc4" path="res://Core/Components/AIController.cs" id="3_ho2ef"]
 
 [sub_resource type="Animation" id="Animation_sweqy"]
@@ -86,9 +87,13 @@ size = Vector2(49, 20)
 [node name="Skeleton" groups=["enemy"] instance=ExtResource("1_80yvr")]
 collision_layer = 8
 collision_mask = 7
+script = ExtResource("2_phdcb")
 
 [node name="HealthComponent" parent="." index="1"]
 _maxHealth = 5
+
+[node name="HurtBox" parent="." index="3"]
+position = Vector2(0, -3)
 
 [node name="Sprite" parent="." index="4"]
 texture = ExtResource("2_2wssp")

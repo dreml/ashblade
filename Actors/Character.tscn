@@ -13,7 +13,7 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_onrkg"]
 radius = 22.0
-height = 66.0
+height = 64.0
 
 [node name="Character" type="CharacterBody2D"]
 collision_layer = 2
