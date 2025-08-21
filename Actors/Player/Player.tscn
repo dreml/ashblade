@@ -137,7 +137,6 @@ shape = SubResource("CapsuleShape2D_4x03u")
 
 [node name="Camera2D" type="Camera2D" parent="." index="8"]
 offset = Vector2(0, -150)
-zoom = Vector2(0.9, 0.9)
 position_smoothing_enabled = true
 position_smoothing_speed = 10.0
 drag_horizontal_enabled = true
