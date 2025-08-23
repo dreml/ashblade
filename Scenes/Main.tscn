@@ -1,10 +1,11 @@
-[gd_scene load_steps=6 format=3 uid="uid://78fosqhqt88t"]
+[gd_scene load_steps=7 format=3 uid="uid://78fosqhqt88t"]
 
 [ext_resource type="Texture2D" uid="uid://duwcshpcuxix" path="res://Assets/Sprites/Background/sky.png" id="1_v1gob"]
 [ext_resource type="PackedScene" uid="uid://cm4s12v07gsa1" path="res://Actors/Player/Player.tscn" id="2_idj7w"]
 [ext_resource type="PackedScene" uid="uid://bi3lc7uu7ajoj" path="res://Actors/Skeleton/Skeleton.tscn" id="3_kln2b"]
 [ext_resource type="PackedScene" uid="uid://c4xw21g83pwxw" path="res://Maps/World 1.tmx" id="3_rgh2o"]
 [ext_resource type="Texture2D" uid="uid://c2t8d0wr2ia4u" path="res://Assets/Sprites/Background/trees.png" id="3_v1gob"]
+[ext_resource type="PackedScene" uid="uid://cnn68tsa7tl0n" path="res://Actors/LevelLimiter.tscn" id="6_v1gob"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -36,8 +37,11 @@ centered = false
 position = Vector2(0, -200)
 
 [node name="Player" parent="." groups=["player"] instance=ExtResource("2_idj7w")]
-position = Vector2(240, 497)
+position = Vector2(458, 602)
 
 [node name="Skeleton" parent="." instance=ExtResource("3_kln2b")]
-position = Vector2(614, 538)
+position = Vector2(1627, 596)
 scale = Vector2(-1, 1)
+
+[node name="LevelLimiter" parent="." instance=ExtResource("6_v1gob")]
+position = Vector2(184, 414)

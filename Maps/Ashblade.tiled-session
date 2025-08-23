@@ -52,6 +52,22 @@
             "scaleInDock": 1,
             "scaleInEditor": 0.75
         },
+        "Tilesets/Decorations/Tree2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/Decorations/Tree4.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/Terrain/Tree2.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
+        "Tilesets/Terrain/Tree3.tsx": {
+            "scaleInDock": 1,
+            "scaleInEditor": 1
+        },
         "Water Background.tsx": {
             "scaleInDock": 1,
             "scaleInEditor": 1
@@ -91,6 +107,10 @@
     ],
     "project": "Ashblade.tiled-project",
     "recentFiles": [
+        "Tilesets/Decorations/Tree4.tsx",
+        "Tilesets/Terrain/Tree3.tsx",
+        "Tilesets/Terrain/Tree2.tsx",
+        "Tilesets/Decorations/Tree2.tsx",
         "Tilesets/Decorations/Tree1.tsx",
         "Ground Color 1.tsx",
         "World 1.tmx",
@@ -98,16 +118,12 @@
         "Bushe4.tsx",
         "Bushe3.tsx",
         "Bushe2.tsx",
-        "Bushe1.tsx",
-        "Bushes.tsx",
-        "Water_Elevation_#1.tsx",
-        "Ashblade/Ground Color 1.tsx",
-        "Ashblade/World 1.tmx"
+        "Bushe1.tsx"
     ],
     "tileset.lastUsedFilter": "Tiled tileset files (*.tsx *.xml)",
     "tileset.lastUsedFormat": "tsx",
     "tileset.tileSize": {
-        "height": 256,
+        "height": 192,
         "width": 192
     },
     "tileset.type": 0
